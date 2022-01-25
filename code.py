@@ -19,7 +19,7 @@ warnings.filterwarnings('ignore')
 ##################ORGANIZANDO DATASET
 ##################################################
 ############################
-df = pd.read_csv("/home/camila/Área de Trabalho/pibiti/train.csv",index_col=0) # index_col = 0 (Para ignorar a primeira coluna index)
+df = pd.read_csv("/mnt/data/trainer/plants_diseases_classification/train.csv",index_col=0) # index_col = 0 (Para ignorar a primeira coluna index)
 print(df.shape)
 df.head()
 
@@ -40,7 +40,7 @@ os.mkdir('temp/images/rust')
 os.mkdir('temp/images/scab')
 
 #Será pego as imagens que estão na pasta images convert
-SOURCE = '/home/camila/Área de Trabalho/pibiti/images convert'
+SOURCE = '//mnt/data/trainer/plants_diseases_classification/images convert'
 
 #Serão divididas na pasta criada images
 SPLIT_DIR = 'temp/images/'
@@ -180,7 +180,7 @@ X_test = np.vstack(X_test)
 
 
 #####################
-filepath = '/home/camila/Área de Trabalho/pibiti/images convert/Test_3.jpg'
+filepath = '//mnt/data/trainer/plants_diseases_classification/images convert/Test_3.jpg'
 img = image.load_img(filepath, target_size=(img_height, img_width))
 plt.imshow(img)
 x = image.img_to_array(img)
@@ -196,5 +196,5 @@ predictions = model.predict(X_test, batch_size= 10)
 score = tf.nn.softmax(predictions)
 score = np.array(score)
 df_out = pd.concat([test_set.reset_index(), pd.DataFrame(score, columns = class_names)], axis=1).set_index("image_id")
-df_out.to_csv('/home/camila/Área de Trabalho/pibiti/submission.csv')
+df_out.to_csv('/mnt/data/trainer/plants_diseases_classification/submission.csv')
 df_out.head()
